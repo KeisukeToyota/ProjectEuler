@@ -1,5 +1,13 @@
+func1::[Int] -> Int
+func1 = sum . map (^2)
+
+func2::[Int] -> Int
+func2 = (^2) . sum
+
+func3::[Int] -> Int
+func3 = foldr (-) 0 . (\x -> map (\f -> f x) [func2, func1])
+
 main::IO()
 main = do
-  let x1 = sum $ map (^2) [1..100]
-  let x2 = sum [1..100] ^ 2
-  print $ x2 - x1
+  print $ func3 [1..100]
+
